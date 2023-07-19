@@ -9,6 +9,8 @@ import { Machine } from './machine/models/machine.model';
 import { MachineModule } from './machine/machine.module';
 import { Driver } from './driver/models/driver.model';
 import { DriverModule } from './driver/driver.module';
+import { Machine_driver } from './machine_driver/models/machine_driver.model';
+import { Machine_driverModule } from './machine_driver/machine_driver.module';
 
 @Module({
   imports: [
@@ -20,14 +22,15 @@ import { DriverModule } from './driver/driver.module';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [Company,Builder,Machine,Driver],
+      models: [Company,Builder,Machine,Driver,Machine_driver],
       autoLoadModels: true,
       logging: true,
     }),
     CompanyModule,
     BuilderModule,
     MachineModule,
-    DriverModule
+    DriverModule,
+    Machine_driverModule
   ],
   controllers: [],
   providers: [],

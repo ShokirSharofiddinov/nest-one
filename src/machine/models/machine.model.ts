@@ -1,4 +1,6 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Company } from 'src/company/models/company.model';
+import { Machine_driver } from 'src/machine_driver/models/machine_driver.model';
 
 interface MachineAttr {
   name: string;
@@ -20,8 +22,16 @@ export class Machine extends Model<Machine, MachineAttr> {
   })
   name: string;
 
+  @ForeignKey(() => Company)
   @Column({
     type: DataType.INTEGER,
+    onDelete: 'CASCADE',
   })
-  company_id: Number;
+  company_id: number;
+
+  @BelongsTo(() => Company)
+  company: Company;
+
+  @HasMany(() => Machine_driver)
+  machine_driver: Machine_driver[];
 }

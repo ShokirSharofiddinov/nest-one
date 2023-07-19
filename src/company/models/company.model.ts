@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Builder } from 'src/builder/models/builder.model';
 
 interface CompanyAttr {
   name: string;
@@ -31,4 +32,7 @@ export class Company extends Model<Company, CompanyAttr> {
     type: DataType.STRING,
   })
   phone: string;
+
+  @HasMany(() => Builder)
+  builders: Builder[]
 }

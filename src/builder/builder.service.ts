@@ -14,7 +14,9 @@ export class BuilderService {
   }
 
   async getAllBuilder(): Promise<Builder[]> {
-    const companies = await this.builderRepo.findAll();
+    const companies = await this.builderRepo.findAll({
+      include: { all: true },
+    });
     return companies;
   }
 

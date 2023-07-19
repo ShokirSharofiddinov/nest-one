@@ -14,7 +14,9 @@ export class MachineService {
   }
 
   async getAllMachine(): Promise<Machine[]> {
-    const companies = await this.machineRepo.findAll();
+    const companies = await this.machineRepo.findAll({
+      include: { all: true },
+    });
     return companies;
   }
 
