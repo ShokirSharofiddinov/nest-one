@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { Company } from 'src/company/models/company.model';
 import { Machine_driver } from 'src/machine_driver/models/machine_driver.model';
@@ -9,6 +10,7 @@ interface MachineAttr {
 
 @Table({ tableName: 'machine' })
 export class Machine extends Model<Machine, MachineAttr> {
+  @ApiProperty({ example: 1, description: 'Unikal ID' })
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -16,12 +18,14 @@ export class Machine extends Model<Machine, MachineAttr> {
   })
   id: number;
 
+  @ApiProperty({ example: 'machine1', description: 'name not null' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   name: string;
 
+  @ApiProperty({ example: 1, description: 'company_id ulash' })
   @ForeignKey(() => Company)
   @Column({
     type: DataType.INTEGER,
