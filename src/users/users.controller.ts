@@ -1,10 +1,14 @@
-import { Controller, Get, Post, Body, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode, UseGuards, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './model/user.model';
 import { AddRoleDto } from './dto/add-role.dto';
 import { ActivateUserDto } from './dto/activate-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UserSelfGuard } from 'src/guards/user.self.guard';
+import { Roles } from 'src/decorators/roles-auth.decorator';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 @ApiTags('Foydalanuvchilar')
 // @ApiOperation({ summary: 'Foydalanuvchi yaratish' })
@@ -13,15 +17,26 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @ApiOperation({ summary: 'Foydalanuvchi yaratish' })
+  @Roles('ADMIN', 'SUPERADMIN')
+  @UseGuards(RolesGuard)
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.createUser(createUserDto);
   }
 
   @ApiOperation({ summary: "Foydalanuvchi Ko'rish" })
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAllUsers() {
     return this.usersService.getAllUser();
+  }
+
+  @ApiOperation({ summary: "Foydalauvchi ID bo'yicha ko'rish" })
+  @UseGuards(UserSelfGuard)
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  getOneUser(@Param('id') id: number): Promise<User> {
+    return this.usersService.getOneUser(id);
   }
 
   @ApiOperation({ summary: "role qo'shish" })
