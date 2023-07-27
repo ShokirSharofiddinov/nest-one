@@ -5,10 +5,10 @@ import { User } from './model/user.model';
 import { AddRoleDto } from './dto/add-role.dto';
 import { ActivateUserDto } from './dto/activate-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { UserSelfGuard } from 'src/guards/user.self.guard';
-import { Roles } from 'src/decorators/roles-auth.decorator';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { UserSelfGuard } from '../guards/user.self.guard';
+import { Roles } from '../decorators/roles-auth.decorator';
+import { RolesGuard } from '../guards/roles.guard';
 
 @ApiTags('Foydalanuvchilar')
 // @ApiOperation({ summary: 'Foydalanuvchi yaratish' })

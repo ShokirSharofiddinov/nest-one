@@ -1,9 +1,14 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UsersService } from 'src/users/users.service';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
 
 import * as bcrypt from 'bcrypt';
-import { User } from 'src/users/model/user.model';
+import { User } from '../users/model/user.model';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login-auth.dto';
 
@@ -32,26 +37,26 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    const user = await this.validateUser(loginDto)
-    if(!user){
-      throw new HttpException('Foydalanuvchi topilmadi', HttpStatus.NOT_FOUND)
+    const user = await this.validateUser(loginDto);
+    if (!user) {
+      throw new HttpException('Foydalanuvchi topilmadi', HttpStatus.NOT_FOUND);
     }
-    return this.generateToken(user)
+    return this.generateToken(user);
   }
 
   private async validateUser(loginDto: LoginDto) {
-    const user = await this.userService.getUserByEmail(loginDto.email)
-    if(!user) {
-      throw new UnauthorizedException("Email yoki Parol noto'g'ri")
+    const user = await this.userService.getUserByEmail(loginDto.email);
+    if (!user) {
+      throw new UnauthorizedException("Email yoki Parol noto'g'ri");
     }
     const validPassword = await bcrypt.compare(
       loginDto.password,
-      user.password
-    )
-    if(validPassword) {
-      return user
+      user.password,
+    );
+    if (validPassword) {
+      return user;
     }
-    throw new UnauthorizedException("Email yoki Parol noto'g'ri!")
+    throw new UnauthorizedException("Email yoki Parol noto'g'ri!");
   }
 
   private async generateToken(user: User) {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import { Builder } from 'src/builder/models/builder.model';
+import { Builder } from '../../builder/models/builder.model';
 
 interface CompanyAttr {
   name: string;
@@ -32,7 +32,7 @@ export class Company extends Model<Company, CompanyAttr> {
   })
   address: string;
 
-  @ApiProperty({ example: "99 999 99 99", description: 'company phone numer' })
+  @ApiProperty({ example: '99 999 99 99', description: 'company phone numer' })
   @Column({
     type: DataType.STRING,
   })

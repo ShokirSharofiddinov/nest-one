@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Company } from '../../company/models/company.model';
 
 interface BuilderAttr {
   full_name: string;

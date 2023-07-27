@@ -14,8 +14,8 @@ export class DriverService {
   }
 
   async getAllDriver(): Promise<Driver[]> {
-    const companies = await this.driverRepo.findAll();
-    return companies;
+    const driver = await this.driverRepo.findAll();
+    return driver;
   }
 
   async getDriverById(id: number): Promise<Driver> {

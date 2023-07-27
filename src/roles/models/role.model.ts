@@ -6,7 +6,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { User } from 'src/users/model/user.model';
+import { User } from '../../users/model/user.model';
 import { UserRoles } from './user-roles.model';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -16,7 +16,7 @@ interface RoleCreationAttr {
 }
 @Table({ tableName: 'roles' })
 export class Role extends Model<Role, RoleCreationAttr> {
-  @ApiProperty({example: 1, description: 'Unikal ID'})
+  @ApiProperty({ example: 1, description: 'Unikal ID' })
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -36,7 +36,7 @@ export class Role extends Model<Role, RoleCreationAttr> {
     allowNull: false,
   })
   description: string;
-  
+
   @BelongsToMany(() => User, () => UserRoles)
-  user: User[]
+  user: User[];
 }
