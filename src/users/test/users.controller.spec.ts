@@ -63,4 +63,39 @@ describe('User controller', () => {
       });
     });
   });
+
+  describe('getAllUsers', () => {
+    describe('when getAllUsers id called', () => {
+      let users: User[];
+      beforeEach(async () => {
+        users = await usersController.getAllUsers();
+      });
+      it('then it should call usersService', () => {
+        expect(usersService.getOneUser).toBeCalled();
+      });
+
+      it('then it should return user', () => {
+        expect(users).toEqual([userStub()]);
+      });
+    });
+  });
+
+  // describe('deleteUser', () => {
+  //   describe('when deleteUser id called', () => {
+  //     let res: Object;
+  //     beforeEach(async () => {
+  //       res = await usersController.deleteUser(userStub().id);
+  //       console.log(res)
+  //     });
+  //     it('then it should call usersService', () => {
+  //       expect(usersService.deleteUser).toBeCalled(userStub().id);
+  //     });
+
+  //     it('then it should return message', () => {
+  //       expect(res).toEqual({message: "Foydalnuvchi o'chirildi"});
+  //     });
+  //   });
+  // });
+
+  
 });

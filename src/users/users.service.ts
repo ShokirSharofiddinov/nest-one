@@ -33,7 +33,7 @@ export class UsersService {
     return newUser;
   }
 
-  async getAllUser() {
+  async getAllUsers() {
     const users = await this.userRepo.findAll({ include: { all: true } });
     return users;
   }

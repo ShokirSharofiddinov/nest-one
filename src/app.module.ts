@@ -49,7 +49,7 @@ import { resolve } from 'path';
         Post
       ],
       autoLoadModels: true,
-      logging: true,
+      logging: false,
     }),
     CompanyModule,
     BuilderModule,

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, HttpCode, UseGuards, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  HttpCode,
+  UseGuards,
+  Param,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './model/user.model';
@@ -27,8 +35,8 @@ export class UsersController {
   @ApiOperation({ summary: "Foydalanuvchi Ko'rish" })
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAllUsers() {
-    return this.usersService.getAllUser();
+  getAllUsers() {
+    return this.usersService.getAllUsers();
   }
 
   @ApiOperation({ summary: "Foydalauvchi ID bo'yicha ko'rish" })
